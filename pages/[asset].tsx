@@ -1,53 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Graph from '../components/graph/graph'
+import Calculator from '../components/calculator/calculator'
 import { CryptoClient } from '../api/crypto'
 import Routes from '../services/crypto'
+
+
+function isValidQuery(query: string | string[] | undefined){
+  // check the query properties
+  return typeof (query) === 'string'
+}
+
+
+type Data = Array<Array<[number, number]>>
+
 export default function Asset() {
-
+    const [data, setData] = useState<Data>([])
     const router = useRouter()
-    const {asset} = router.query
-    console.log(asset)
-
+    let { asset } = router.query
+    
     useEffect(() => {
-      if(asset && asset!==undefined) {
-        getPrices(asset)
+      if(isValidQuery(asset)) {
+        getPrices(asset as string)
       }
-      
     }, [asset])
 
     async function getPrices(name: string) {
       const {getPricesFromTimeFrame} = Routes
-      await CryptoClient.get(getPricesFromTimeFrame({name, interval: 'monthly'}))
+      const resp = await CryptoClient.get(getPricesFromTimeFrame({name, interval: 'daily'}))
+      setData(resp.data.prices)
     }
-
-    const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top' as const,
-          },
-          title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-          },
-        },
-      };
-      
-      const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-      
-      const data = {
-        labels,
-        datasets: [
-          {
-            label: 'Dataset 1',
-            data: [111,202,-203,393,928,-209,-393],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          },
-        ],
-      };
     return <>
-        <Graph options={options} data={data}/>
+       { data.length && <Graph data={data}/> }
+       <Calculator />
     </>
 }
