@@ -55,8 +55,8 @@ export default function Graph({data}: { data:ChartData }) {
                     y2: 1
                 },
                 stops: [
-                  [0, "#7cb5ec"],
-                  [1, "rgba(124,181,236,0)"]
+                  [0, "rgba(25,199,132,0)"],
+                  [1, "rgba(255,255,255,1)"]
               ]
             },
             marker: {
@@ -74,7 +74,7 @@ export default function Graph({data}: { data:ChartData }) {
 
     series: [{
         type: 'area',
-        name: 'USD to EUR',
+        name: 'BTC to USD',
         data
     }]
     

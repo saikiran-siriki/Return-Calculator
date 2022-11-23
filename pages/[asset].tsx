@@ -30,8 +30,15 @@ export default function Asset() {
       const resp = await CryptoClient.get(getPricesFromTimeFrame({name, interval: 'daily'}))
       setData(resp.data.prices)
     }
-    return <>
-       { data.length && <Graph data={data}/> }
-       <Calculator />
-    </>
+    return <div className="asset_layout">
+      <div className="graph_container">
+        { data.length && <Graph data={data}/> }
+      </div>
+      <h2 className="calculator_heading">Return Calculator</h2>
+      <div className="calculator_container">
+        <Calculator />
+      </div>
+       
+       
+    </div>
 }

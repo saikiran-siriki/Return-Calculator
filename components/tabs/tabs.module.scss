@@ -1,0 +1,16 @@
+.tabs {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+    padding-inline-start: 0px;
+    &__item {
+        padding: 0.75rem 0.75rem;
+        cursor: pointer;
+        color: $sub-text
+    }
+    &__active {
+        background: $secondary-color;
+        color: $primary-color;
+        border-radius: 0.7rem;
+    }
+}

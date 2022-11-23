@@ -1,15 +1,34 @@
 import {useState} from 'react'
 import Tabs from '../tabs/tabs'
-export default function Graph() {
-    const [tabs, setTabs] = useState([{name: 'Daily', active: true},{name: 'Weekly', active: false},{name: 'Monthly', active: false},])
+import Slider from '../rangeslider/rangeslider'
+import styles from './calculator.module.scss'
 
-    function onSelectTab(i: number) {
-        const newTabs = tabs.map((tab, index) => {
+interface TabItem  {
+    name: string,
+    active: Boolean
+}
+type TabItems = Array<TabItem>
+export default function Graph() {
+    const [dcaTime, setDcaTime] = useState([{name: 'Daily DCA', active: true},{name: 'Weekly DCA', active: false},{name: 'Monthly DCA', active: false},])
+    const [duration, setDuration] = useState([{name: '1 Year', active: true},{name: '2 Year', active: false},{name: '3 Year', active: false}])
+
+    
+
+    function onSelectTab(i: number, items: TabItems, setItems: Function) {
+        const newTabs = items.map((tab, index) => {
             return {...tab, active: index===i}
         })
-        setTabs(newTabs)
+        setItems(newTabs)
     }
-    return <>
-        <Tabs tabs={tabs} onSelectTab={onSelectTab}/>
+
+    return (<>
+        <Tabs tabs={dcaTime} onSelectTab={onSelectTab} items={dcaTime} setEvent={setDcaTime}/>
+        <div className={styles.slider_container}>
+            <Slider/>
+        </div>
+       
+        <h3 className={styles.heading}>Over the past</h3>
+        <Tabs tabs={duration} onSelectTab={onSelectTab} items={duration} setEvent={setDuration}/>
     </>
+    )
 }
