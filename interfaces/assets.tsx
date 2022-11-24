@@ -1,0 +1,1 @@
+export type PriceData = Array<Array<number>>;
