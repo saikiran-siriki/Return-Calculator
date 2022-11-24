@@ -6,7 +6,16 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import "variables.scss";`
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/bitcoin',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
