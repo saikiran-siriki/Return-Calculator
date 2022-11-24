@@ -9,7 +9,7 @@ interface TabItem  {
     title: string
 }
 type TabItems = Array<TabItem>
-export default function Calculator({assetData}) {
+export default function Calculator({assetData}: {assetData: Array<Array<number>>}) {
     const [dcaTime, setDcaTime] = useState([{name: 'Daily DCA', active: true, title:'Day', everyXDays: 1},{name: 'Weekly DCA', active: false, title:'Week', everyXDays: 7},{name: 'Monthly DCA', active: false, title:'Month', everyXDays: 30},])
     const [duration, setDuration] = useState([{name: '1 Year', active: true, days: 365},{name: '2 Years', active: false, days: 730},{name: '3 Years', active: false, days: 1095},{name: '4 Years', active: false, days: 1460},{name: '5 Years', active: false, days: 1825}])
     const [investmentPerTimeFrame, setInvestmentPerTimeFrame] = useState(1)
@@ -20,9 +20,10 @@ export default function Calculator({assetData}) {
         const filteredDurationDays = duration.filter(item=>item.active)[0].days
         const filteredDcaDays = dcaTime.filter(item=>item.active)[0].everyXDays
         const filteredAssetDataArr = assetData.slice(assetData.length-filteredDurationDays, assetData.length)
-        const todayAsssetValue = assetData.at(-1)[1]
+        const todayAsssetArr = assetData.at(-1) as number[]
+        const todayAsssetValue = todayAsssetArr[1]
         const filteredAssetAccumulatedVal = filteredAssetDataArr.reduce((a, b, index: number)=>{if(index%filteredDcaDays===0) {return a+(investmentPerTimeFrame/b[1])} else {return a}},0)
-        setPortfolioValue((filteredAssetAccumulatedVal*todayAsssetValue).toFixed(2))
+        setPortfolioValue(Number((filteredAssetAccumulatedVal*todayAsssetValue).toFixed(2)))
 
         const totalInvested = Math.floor(investmentPerTimeFrame*filteredDurationDays/filteredDcaDays)
         setTotalInvestment(totalInvested)
