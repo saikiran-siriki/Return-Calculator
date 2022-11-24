@@ -4,6 +4,7 @@ import Graph from '../components/graph/graph'
 import Calculator from '../components/calculator/calculator'
 import { CryptoClient } from '../api/crypto'
 import Routes from '../services/crypto'
+import axios from 'axios'
 
 
 function isValidQuery(query: string | string[] | undefined){
@@ -27,8 +28,8 @@ export default function Asset() {
 
     async function getPrices(name: string) {
       const {getPricesFromTimeFrame} = Routes
-      const resp = await CryptoClient.get(getPricesFromTimeFrame({name, interval: 'daily'}))
-      setData(resp.data.prices)
+      const resp = await axios.get(`api/${name}`)
+      setData(resp.data)
     }
     return <div className="asset_layout">
       <div className="graph_container">
