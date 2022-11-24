@@ -25,7 +25,7 @@ export default function Asset() {
   }
   return (
     <div className="asset_layout">
-      {data.length && (
+      {data.length>0 && (
         <>
           <div className="graph_container">
             <Graph data={data} />
