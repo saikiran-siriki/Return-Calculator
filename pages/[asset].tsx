@@ -12,7 +12,7 @@ function isValidQuery(query: string | string[] | undefined){
 }
 
 
-type Data = Array<Array<[number, number]>>
+type Data = Array<Array<number>>
 
 export default function Asset() {
     const [data, setData] = useState<Data>([])

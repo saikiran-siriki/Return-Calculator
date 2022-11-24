@@ -5,7 +5,7 @@ import HighchartsReact from 'highcharts-react-official'
 
 
 
-type ChartData = Array<Array<[number, number]>>
+type ChartData = Array<Array<number>>
   
   // export const options = {
   //   responsive: true,
