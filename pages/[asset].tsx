@@ -36,7 +36,7 @@ export default function Asset() {
       </div>
       <h2 className="calculator_heading">Return Calculator</h2>
       <div className="calculator_container">
-        <Calculator />
+        { data.length && <Calculator assetData={data}/> }
       </div>
        
        

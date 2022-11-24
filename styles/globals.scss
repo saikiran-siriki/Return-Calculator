@@ -39,11 +39,12 @@ a {
   }
   .calculator_container {
     width: 80%;
-    padding: 5rem;
+    padding: 3rem;
     border: 1px solid $border;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
+    gap: 1.5rem
   }
 }
 
