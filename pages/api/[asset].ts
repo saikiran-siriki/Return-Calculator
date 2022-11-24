@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {CryptoClient} from '../../api/crypto'
+import {CryptoClient} from '../../api-client/crypto'
 import Routes from '../../services/crypto'
 const NodeCache = require('node-cache');
 const myCache = new NodeCache({ stdTTL: 600 });

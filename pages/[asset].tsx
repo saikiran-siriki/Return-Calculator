@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Graph from '../components/graph/graph'
 import Calculator from '../components/calculator/calculator'
-import { CryptoClient } from '../api/crypto'
 import Routes from '../services/crypto'
 import axios from 'axios'
 
