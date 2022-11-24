@@ -2,6 +2,7 @@
     list-style-type: none;
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
     padding-inline-start: 0px;
     &__item {
         padding: 0.75rem 0.75rem;
