@@ -17,14 +17,17 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@media only screen and (max-width: 1050px) {
+  .asset_layout{
+    padding: 2rem;
+    .box_container {
+      flex-basis: 100% !important;
+    }
+    .calculator_container {
+      flex-basis: 100% !important;
+    }
   }
-  body {
-    color: white;
-    background: black;
-  }
+    
 }
 
 
@@ -35,6 +38,7 @@ a {
   align-items: center;
   gap: 3rem;
   min-height: 100vh;
+  flex-wrap: wrap;
   .calculator_container {
     padding: 3rem;
     border: 1px solid $border;
@@ -49,7 +53,8 @@ a {
     min-width: 40%;
     display: flex;
     flex-direction: column;
-    gap: 2rem
+    gap: 2rem;
+    border-radius: 6px
   }
 }
 
@@ -72,7 +77,9 @@ a {
   transition: color, background-color var(--transition-duration);
 }
 
-@import '../components/switch/switch.scss'
+@import '../components/switch/switch.scss';
+
+
 
 
 
