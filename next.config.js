@@ -14,7 +14,16 @@ const nextConfig = {
         hostname: 'assets.coingecko.com',
       }
     ]
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/bitcoin',
+        permanent: true,
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig

@@ -31,13 +31,10 @@ export default function AssetSelect({ assetData }: { assetData: AllCoins }) {
     setCoin(assetData.filter((item) => item.id === event.target.value)[0]);
     Router.push(
       {
-        pathname: `/`,
-        query: {
-          asset: event.target.value,
-        },
+        pathname: `/${event.target.value}`,
       },
       undefined,
-      { shallow: true }
+      { shallow: false }
     );
   };
 
