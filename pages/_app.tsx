@@ -21,10 +21,10 @@ let defaultMuiTheme = createTheme({
   },
 });
 
-const defaultTheme = "dark";
+const defaultTheme = "light";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [theme, setTheme] = useState(defaultTheme);
+  const [theme, setTheme] = useState(defaultTheme) as PaletteMode;
   const [muiTheme, setMuiTheme] = useState(defaultMuiTheme)
 
   useEffect(() => {
@@ -37,7 +37,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const MUILightthemeConfig = {
     // palette values for light mode
     primary:  {main: '#120b1f'},
-    divider: { main: '#120b1f' },
     text: {
       primary: '#120b1f',
       secondary: '#120b1f',
@@ -47,7 +46,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const MUIDarkthemeConfig = {
     // palette values for light mode
     primary: {main: '#eaeaf5'},
-    divider: '#f9f5fa',
     text: {
       primary: '#eaeaf5',
       secondary: '#2c1952',
