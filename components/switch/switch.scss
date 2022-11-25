@@ -1,0 +1,42 @@
+button {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  border-radius: 9px;
+}
+
+
+
+.app {
+  background-color: var(--primary-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-8);
+}
+
+.app svg {
+  stroke: var(--primary-8);
+}
+
+.app .moon-icon {
+  stroke-dasharray: 0px 1px;
+  opacity: 0;
+  transition: stroke-dasharray 0.5s ease-in, opacity 300ms ease-in;
+}
+
+.app .sun-icon {
+  stroke-dasharray: 1px 1px;
+  opacity: 1;
+  transition: stroke-dasharray 0.5s ease-in, opacity 300ms ease-in;
+}
+
+.app.dark .moon-icon {
+  stroke-dasharray: 1px 1px;
+  opacity: 1;
+}
+
+.app.dark .sun-icon {
+  stroke-dasharray: 0px 1px;
+  opacity: 0;
+}

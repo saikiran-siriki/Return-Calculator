@@ -10,8 +10,8 @@
         color: $sub-text
     }
     &__active {
-        background: $secondary-color;
-        color: $primary-color;
+        background: var(--primary-3);
+        color: var(--primary-8);
         border-radius: 0.7rem;
         font-weight: 500
     }

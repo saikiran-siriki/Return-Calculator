@@ -37,7 +37,8 @@ export default function Graph({data}: { data:PriceData }) {
   if (isValidQuery(asset)) {
      options = {
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            backgroundColor: 'var(--primary-1)'
         },
         title: {
             text: ``
@@ -63,8 +64,8 @@ export default function Graph({data}: { data:PriceData }) {
                         y2: 1
                     },
                     stops: [
-                      [0, "rgba(25,199,132,0)"],
-                      [1, "rgba(255,255,255,1)"]
+                      [0, "var(--primary-1)"],
+                      [1, "var(--primary-1)"]
                   ]
                 },
                 marker: {

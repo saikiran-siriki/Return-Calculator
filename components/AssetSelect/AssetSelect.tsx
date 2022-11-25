@@ -54,12 +54,22 @@ export default function AssetSelect({ assetData }: { assetData: AllCoins }) {
               id="demo-simple-select-autowidth"
               value={asset as string}
               onChange={handleChange}
-              label="Age"
+              label="Coin"
               autoWidth
               renderValue={() => (
                 <div className={styles.renderValue}>{coin?.name}</div>
               )}
               defaultValue={assetData[0].id}
+              sx={{
+                height: '2.5rem',
+                color: 'var(--inverted-3)',
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'var(--inverted-2)'
+                },
+                '& .MuiSvgIcon-root': {
+                    color: 'var(--inverted-2)'
+                }
+            }}
             >
               {assetData.map(({ id, name, image, symbol }) => {
                 return (

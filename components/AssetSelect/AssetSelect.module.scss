@@ -11,7 +11,8 @@
     }
     .renderValue {
         position: absolute;
-        left: 10%
+        left: 10%;
+        color: var(--text-primary)
     }
 }
 
@@ -23,7 +24,7 @@
     }
     
     &__name {
-        color: $text-primary;
-        font-weight: 700
+        color: var(--text-primary);
+        font-weight: 500
     }
 }

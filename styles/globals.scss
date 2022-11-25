@@ -47,7 +47,33 @@ a {
     border: 1px solid $border;
     padding: 2rem;
     min-width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem
   }
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  width: 80%;
+  margin-left: 10%;
+  align-items: center;
+}
+
+:root {
+  --transition-duration: 300ms;
+}
+
+.parent_container {
+  background: var(--primary-1);
+  color: var(--text-primary);
+  transition: color, background-color var(--transition-duration);
+}
+
+@import '../components/switch/switch.scss'
+
+
 
 

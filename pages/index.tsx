@@ -15,8 +15,6 @@ export default function Asset() {
   let { asset } = router.query;
 
   useEffect(() => {
-    console.log(asset)
-    console.log(router)
     if(router.asPath==='/') {
         const url = {
             pathname: router.pathname,
