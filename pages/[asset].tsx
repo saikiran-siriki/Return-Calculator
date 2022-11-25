@@ -36,7 +36,7 @@ export async function getStaticPaths(context: any) {
     return { params: { asset: item.id } }
   })
   return {
-    paths: paths,
+    paths: paths.slice(0,30), //limiting the static renders to first 30, this is to deal with the freetier api limit of Coingecko
     fallback: false, // can also be true or 'blocking'
   }
   } catch(e) {
