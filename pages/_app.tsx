@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { useState, useEffect, createContext } from "react";
 import Header from "../components/Header/Header";
 import Theme from "../components/Theme/Theme"
+import AnalyticsWrapper from '../components/analytics/analytics';
 
 export const ThemeContext = createContext(false);
 interface Param {
@@ -89,6 +90,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Theme theme={theme} />
         <Header />
           <Component {...pageProps} />
+          <AnalyticsWrapper />
         </ThemeProvider>
       </UpdateThemeContext.Provider>
     </ThemeContext.Provider>
