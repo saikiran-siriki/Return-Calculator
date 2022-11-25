@@ -5,6 +5,7 @@ import Calculator from "../components/calculator/calculator";
 import axios from "axios";
 import { isValidQuery } from "../utils/helpers";
 import { PriceData, AllCoins, CoinData } from "../interfaces/assets";
+import IndexPage from "../components/IndexPage/IndexPage";
 import dynamic from "next/dynamic";
 const Graph = dynamic(() => import("../components/graph/graph"), {
   ssr: false,
@@ -50,16 +51,28 @@ export async function getStaticPaths(context: any) {
 
 export default function Asset({ allCoins, data }: { allCoins: AllCoins, data: PriceData }) {
 
+  interface MetaData {
+    pnl: number,
+    dcaTime: string,
+    duration: string
+  }
+
   const router = useRouter();
   let { asset } = router.query;
+  const [metadata,setMetaData] = useState<MetaData>({pnl:0, dcaTime: "", duration: ""})
+
+  function onCalculatorUpdate(res: MetaData) {
+    setMetaData(res)
+  }
 
 
   return ( <div className="asset_layout">
       {data.length > 0 && (
         <>
+          { metadata.dcaTime && <IndexPage title={`DCA Daily - ${allCoins.filter(item=>item.id===asset)[0].name}`} description={`If you DCA into ${allCoins.filter(item=>item.id===asset)[0].name} ${metadata.dcaTime} for ${metadata.duration}, you make ${metadata.pnl>=0?'a profit of ':'a loss of '}${metadata.pnl}%`} image={allCoins.filter(item=>item.id===asset)[0].image}/> }
           <div className="calculator_container">
             <h2 className="calculator_heading">Return Calculator</h2>
-            <Calculator assetData={data} />
+            <Calculator assetData={data} onCalculatorUpdate={onCalculatorUpdate}/>
           </div>
           <div className="box_container">
             <AssetSelect assetData={allCoins} />
