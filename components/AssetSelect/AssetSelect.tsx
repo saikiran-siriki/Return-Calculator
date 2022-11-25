@@ -12,11 +12,11 @@ import { isValidQuery } from "../../utils/helpers";
 
 export default function AssetSelect({ assetData }: { assetData: AllCoins }) {
   const [coin, setCoin] = useState<CoinData>({
-    id: "",
-    image: "",
+    id: "bitcoin",
+    image: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
     current_price: 0,
-    name: "",
-    symbol: "",
+    name: "Bitcoin",
+    symbol: "BTC",
   });
   const Router = useRouter();
   const { asset } = Router.query;

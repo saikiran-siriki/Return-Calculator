@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Graph from "../components/graph/graph";
 import AssetSelect from "../components/AssetSelect/AssetSelect";
 import Calculator from "../components/calculator/calculator";
 import axios from "axios";
 import {isValidQuery} from '../utils/helpers'
 import {PriceData} from '../interfaces/assets'
+import dynamic from 'next/dynamic'
+const Graph = dynamic(() => import('../components/graph/graph'), {
+    ssr: false,
+  })
+
 
 export default function Asset() {
   const [data, setData] = useState<PriceData>([]);
