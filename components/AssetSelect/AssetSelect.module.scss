@@ -9,10 +9,14 @@
         z-index: 1;
         border-radius: 50%;
     }
+    .renderText {
+        color: var(--text-primary);
+        font-weight: 600
+    }
     .renderValue {
-        position: absolute;
-        left: 10%;
-        color: var(--text-primary)
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
     }
 }
 

@@ -42,9 +42,6 @@ export default function AssetSelect({ assetData }: { assetData: AllCoins }) {
     <div>
       {assetData.length > 0 && isValidQuery(asset) && (
         <div className={styles.assetselect_container}>
-          <div className={styles.assetimage}>
-            <Image src={coin?.image} alt={coin?.name} width={30} height={30} />
-          </div>
           <FormControl fullWidth>
             <Select
               labelId="demo-simple-select-autowidth-label"
@@ -54,7 +51,7 @@ export default function AssetSelect({ assetData }: { assetData: AllCoins }) {
               label="Coin"
               autoWidth
               renderValue={() => (
-                <div className={styles.renderValue}>{coin?.name}</div>
+                <div className={styles.renderValue}><Image src={coin?.image} alt={coin?.name} width={30} height={30} /><div className={styles.renderText}>{coin?.name}</div></div>
               )}
               defaultValue={assetData[0].id}
               sx={{
