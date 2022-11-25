@@ -40,7 +40,7 @@ export default function Graph({data}: { data:PriceData }) {
             zoomType: 'x'
         },
         title: {
-            text: `${(asset as string).charAt(0).toUpperCase()+asset?.slice(1)} to USD exchange rate over time`
+            text: ``
         },
         xAxis: {
             type: 'datetime'
@@ -90,6 +90,6 @@ export default function Graph({data}: { data:PriceData }) {
     return <HighchartsReact
     highcharts={Highcharts}
     options={options}
-    allowChartUpdate = { false } immutable = { false }
+    allowChartUpdate = { true } immutable = { false }
   />;
 }

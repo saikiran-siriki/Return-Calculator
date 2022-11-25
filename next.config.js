@@ -7,15 +7,15 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import "variables.scss";`
   },
-  async redirects() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: '/',
-        destination: '/bitcoin',
-        permanent: true,
-      },
+        protocol: 'https',
+        hostname: 'assets.coingecko.com',
+        port: '',
+      }
     ]
-  },
+  }
 }
 
 module.exports = nextConfig

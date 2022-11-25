@@ -4,27 +4,15 @@ import {CryptoClient} from '../../api-client/crypto'
 import Routes from '../../services/crypto'
 const NodeCache = require('node-cache');
 const myCache = new NodeCache({ stdTTL: 600 });
-
+import {CoinData} from '../../interfaces/assets'
 type Data = {
-  name: string
-}
-
-interface AllCoins {
-    id: string,
-    image: string,
-    current_price: number
-}
-
-async function getPrices(name: string) {
-    const {getPricesFromTimeFrame}  = Routes
-    const resp = await CryptoClient.get(getPricesFromTimeFrame({name, interval: 'daily'}))
-    return resp.data.prices
+    name: string
 }
 
 async function getCoins() {
     const { getAllCoinData } = Routes
     const resp = await CryptoClient.get(getAllCoinData)
-    return resp.data.map((item: AllCoins) => { return {id: item.id, image: item.image, current_price: item.current_price}})
+    return resp.data.map((item: CoinData) => { return {id: item.id, image: item.image, current_price: item.current_price, name: item.name, symbol: item.symbol}})
 }
 
 export default async function handler(
@@ -33,12 +21,12 @@ export default async function handler(
 ) {
     const {asset} = req.query
     try {
-        let prices = myCache.get(asset);
-        if(prices===null || prices===undefined) {
-            prices = await getPrices(asset as string) 
-            myCache.set(asset, prices, 600)
+        let allcoins = myCache.get('allcoins');
+        if(allcoins===null || allcoins===undefined) {
+            allcoins = await getCoins() 
+            myCache.set('allcoins', allcoins, 3600)
         }
-        res.status(200).json(prices)
+        res.status(200).json(allcoins)
 
     } catch(err) {
         console.log(err)

@@ -1,0 +1,29 @@
+.assetselect_container {
+    display: flex;
+    position: relative;
+    .assetimage {
+        position: absolute;
+        right: 92%;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        border-radius: 50%;
+    }
+    .renderValue {
+        position: absolute;
+        left: 10%
+    }
+}
+
+.textcontainer {
+    padding-left: 0.75rem;
+
+    &__symbol {
+        color: $sub-text;
+    }
+    
+    &__name {
+        color: $text-primary;
+        font-weight: 700
+    }
+}

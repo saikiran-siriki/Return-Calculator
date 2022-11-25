@@ -30,21 +30,23 @@ a {
 
 .asset_layout {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  .graph_container {
-    width: 80%
-  }
+  min-height: 100vh;
   .calculator_container {
-    width: 80%;
     padding: 3rem;
     border: 1px solid $border;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem
+  }
+  .box_container {
+    border: 1px solid $border;
+    padding: 2rem;
+    min-width: 40%;
   }
 }
 
