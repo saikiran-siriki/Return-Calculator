@@ -11,6 +11,7 @@ interface Param {
 export const UpdateThemeContext = createContext<any>(null);
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 let defaultMuiTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -24,7 +25,7 @@ let defaultMuiTheme = createTheme({
 const defaultTheme = "light";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [theme, setTheme] = useState(defaultTheme) as PaletteMode;
+  const [theme, setTheme] = useState(defaultTheme);
   const [muiTheme, setMuiTheme] = useState(defaultMuiTheme)
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(()=>{
     setMuiTheme(createTheme({
       palette: {
-        mode: theme,
+        mode: theme as PaletteMode,
         success: {
           main: "#482581",
           light: "red",
