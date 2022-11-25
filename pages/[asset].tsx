@@ -33,12 +33,12 @@ export async function getStaticProps(context: any) {
 export async function getStaticPaths(context: any) {
   try{
     const resp = await axios.get(`https://www.dcadaily.com/api/allcoins`);
-  const paths = resp.data.map((item: CoinData)=>{
+    const paths = resp.data.map((item: CoinData)=>{
     return { params: { asset: item.id } }
   })
   return {
     paths: paths.slice(0,30), //limiting the static renders to first 30, this is to deal with the freetier api limit of Coingecko
-    fallback: true, // can also be true or 'blocking'
+    fallback: 'blocking', // can also be true or 'blocking'
   }
   } catch(e) {
     return {
