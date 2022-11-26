@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.dcadaily.com
+
+# Sitemaps
+Sitemap: https://www.dcadaily.com/sitemap.xml
