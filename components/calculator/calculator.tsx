@@ -39,7 +39,7 @@ export default function Calculator({assetData}: {assetData: Array<Array<number>>
 
     return (<>
         <Tabs tabs={dcaTime} onSelectTab={onSelectTab} items={dcaTime} setEvent={setDcaTime}/>
-        <h4>${investmentPerTimeFrame} per {dcaTime.filter(item=>item.active)[0].title}</h4>
+        <p className='weight500'>${investmentPerTimeFrame} per {dcaTime.filter(item=>item.active)[0].title}</p>
         <div className={styles.slider_container}>
             <Slider defaultValue={1} aria-label="Default" valueLabelDisplay="auto" onChangeCommitted={onSliderChange} max={1000} min={5} step={10} color="success" marks />
         </div>
@@ -47,8 +47,8 @@ export default function Calculator({assetData}: {assetData: Array<Array<number>>
         <h5 className={styles.heading}>Over the past</h5>
         <Tabs tabs={duration} onSelectTab={onSelectTab} items={duration} setEvent={setDuration}/>
         <hr />
-        <h4>Total investment of ${totalInvestment}</h4>
-        <h3>Would have become ${portfolioValue} <span className={`${PnL>=0?styles.profit:styles.loss}`}>({PnL})%</span></h3>
+        <p className='weight500'>Total investment of ${totalInvestment}</p>
+        <h3 className='weight600'>Would have become ${portfolioValue} <span className={`${PnL>=0?styles.profit:styles.loss}`}>({PnL})%</span></h3>
 
     </>
     )
