@@ -15,6 +15,10 @@ const nextConfig = {
       }
     ]
   },
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
   // async redirects() {
   //   return [
   //     {
