@@ -27,14 +27,12 @@ import { PriceData } from '../../interfaces/assets'
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   
 
-export default function Graph({data}: { data:PriceData }) {
+export default function Graph({data, asset}: { data:PriceData, asset: string }) {
   if (typeof Highcharts === 'object') {
     HighchartsExporting(Highcharts)
   }
   const router = useRouter();
-  let { asset } = router.query;
   let options = {}
-  if (isValidQuery(asset)) {
      options = {
         chart: {
             zoomType: 'x',
@@ -86,7 +84,7 @@ export default function Graph({data}: { data:PriceData }) {
             name: `${(asset as string).charAt(0).toUpperCase()+asset?.slice(1)} to USD`,
             data
         }]
-  } 
+  
 }
     return <HighchartsReact
     highcharts={Highcharts}

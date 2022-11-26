@@ -56,8 +56,9 @@ export default function Asset({ allCoins, data, pnl }: { allCoins: AllCoins, dat
 
   const router = useRouter();
   let { asset } = router.query;
+  asset = asset || allCoins[0].id
 
-
+console.log(allCoins, asset)
 
   return ( <div className="asset_layout">
       {data.length > 0 && (
@@ -68,9 +69,9 @@ export default function Asset({ allCoins, data, pnl }: { allCoins: AllCoins, dat
             <Calculator assetData={data}/>
           </div>
           <div className="box_container">
-            <AssetSelect assetData={allCoins} />
+            <AssetSelect assetData={allCoins} asset={asset as string}/>
             <div className="graph_container">
-              <Graph data={data} />
+              <Graph data={data} asset={asset as string}/>
             </div>
           </div>
         </>

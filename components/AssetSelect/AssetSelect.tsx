@@ -10,21 +10,12 @@ import styles from "./AssetSelect.module.scss";
 import { useRouter } from "next/router";
 import { isValidQuery } from "../../utils/helpers";
 
-export default function AssetSelect({ assetData }: { assetData: AllCoins }) {
-  const [coin, setCoin] = useState<CoinData>({
-    id: "bitcoin",
-    image: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
-    current_price: 0,
-    name: "Bitcoin",
-    symbol: "BTC",
-  });
+export default function AssetSelect({ assetData, asset }: { assetData: AllCoins, asset: string }) {
+  const [coin, setCoin] = useState<CoinData>();
   const Router = useRouter();
-  const { asset } = Router.query;
 
   useEffect(() => {
-    if (isValidQuery(asset)) {
       setCoin(assetData.filter((item) => item.id === asset)[0]);
-    }
   }, [assetData, asset]);
 
   const handleChange = (event: SelectChangeEvent) => {

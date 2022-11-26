@@ -15,15 +15,15 @@ const nextConfig = {
       }
     ]
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/bitcoin',
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/bitcoin',
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 }
 
 module.exports = nextConfig
