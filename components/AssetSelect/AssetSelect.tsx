@@ -42,7 +42,7 @@ export default function AssetSelect({ assetData, asset }: { assetData: AllCoins,
               label="Coin"
               autoWidth
               renderValue={() => (
-                <div className={styles.renderValue}><Image src={coin?.image} alt={coin?.name} width={30} height={30} /><div className={styles.renderText}>{coin?.name}</div></div>
+                <div className={styles.renderValue}><Image src={coin?.image as string} alt={coin?.name as string} width={30} height={30} /><div className={styles.renderText}>{coin?.name}</div></div>
               )}
               defaultValue={assetData[0].id}
               sx={{
