@@ -6,22 +6,30 @@ import {TabItems} from '../../interfaces/calculator'
 import { defaultDCA, defaultInvestmentPeriod } from '../../utils/consts'
 import { calculatedPnl } from '../../utils/helpers'
 
+import type { RootState } from '../../state/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateCurrentPortfolioValue, updateTotalInvestment } from '../../state/slices/calculatorSlice'
+
 
 
 export default function Calculator({assetData}: {assetData: Array<Array<number>>}) {
+    const totalInvestedSoFar = useSelector((state: RootState) => state.calculator.totalInvestedSoFar)
+    const currentPortfolioValue = useSelector((state: RootState) => state.calculator.currentPortfolioValue)
+    const dispatch = useDispatch()
+
+
+
     const [dcaTime, setDcaTime] = useState(defaultDCA)
     const [duration, setDuration] = useState(defaultInvestmentPeriod)
     const [investmentPerTimeFrame, setInvestmentPerTimeFrame] = useState(1)
-    const [totalInvestment, setTotalInvestment] = useState<number>(0)
-    const [portfolioValue, setPortfolioValue] = useState<number>(0)
     const [PnL, setPnl] = useState<number>(0)
 
     useEffect(()=>{
         const dcaCycleDays = dcaTime.filter(item=>item.active)[0].everyXDays
         const investmentDurationDays = duration.filter(item=>item.active)[0].days
-        const { pnl, currentPortfolioValue, totalInvestedSoFar} = calculatedPnl(assetData, dcaCycleDays,investmentDurationDays, investmentPerTimeFrame)
-        setPortfolioValue(currentPortfolioValue)
-        setTotalInvestment(totalInvestedSoFar)
+        const { pnl, currentPortfolioValue: currenValue, totalInvestedSoFar: totalValue} = calculatedPnl(assetData, dcaCycleDays,investmentDurationDays, investmentPerTimeFrame)
+        dispatch(updateTotalInvestment(totalValue))
+        dispatch(updateCurrentPortfolioValue(currenValue))
         setPnl(pnl)
        
     }, [dcaTime,duration,investmentPerTimeFrame, assetData])
@@ -47,8 +55,8 @@ export default function Calculator({assetData}: {assetData: Array<Array<number>>
         <h5 className={styles.heading}>Over the past</h5>
         <Tabs tabs={duration} onSelectTab={onSelectTab} items={duration} setEvent={setDuration}/>
         <hr />
-        <p className='weight500'>Total investment of ${totalInvestment}</p>
-        <h3 className='weight600'>Would have become ${portfolioValue} <span className={`${PnL>=0?styles.profit:styles.loss}`}>({PnL})%</span></h3>
+        <p className='weight500'>Total investment of ${totalInvestedSoFar}</p>
+        <h3 className='weight600'>Would have become ${currentPortfolioValue} <span className={`${PnL>=0?styles.profit:styles.loss}`}>({PnL})%</span></h3>
 
     </>
     )

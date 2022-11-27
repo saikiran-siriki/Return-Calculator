@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import { useState, useEffect, createContext } from "react";
 import Header from "../components/Header/Header";
 import Theme from "../components/Theme/Theme"
+import { store } from '../state/store'
+import { Provider } from 'react-redux'
 import AnalyticsWrapper from '../components/analytics/analytics';
 
 export const ThemeContext = createContext(false);
@@ -84,6 +86,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
   return (
     <div className="parent_container">
+      <Provider store={store}>
     <ThemeContext.Provider value={theme === "light"}>
       <UpdateThemeContext.Provider value={toggleTheme}>
         <ThemeProvider theme={muiTheme}>
@@ -94,6 +97,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </ThemeProvider>
       </UpdateThemeContext.Provider>
     </ThemeContext.Provider>
+    </Provider>
     </div>
   );
 }

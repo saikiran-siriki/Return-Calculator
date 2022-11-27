@@ -2,7 +2,8 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 import { PriceData } from '../../interfaces/assets'
 import styles from './graph.module.scss'
 
-
+import type { RootState } from '../../state/store'
+import { useSelector } from 'react-redux'
 
 
 
@@ -25,16 +26,16 @@ import styles from './graph.module.scss'
   
 
   const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>): JSX.Element => {
+    
     if (active && payload && payload.length>0) {
-      console.log(payload)
       const toolTipDisplayMap: { [key: string]: string } = {
-        currentValue: 'Current Portfolio Value',
-        totalValue: 'Total Invested Amount'
+        totalInvested: 'Current Portfolio Value',
+        currentPortfolioValue: 'Total Invested Amount'
       }
       const dataKey = payload[0].dataKey as string
       return (
         <div className={styles.custom_tooltip}>
-          <p className="desc">{toolTipDisplayMap[dataKey]}</p>
+          <p className="desc">{toolTipDisplayMap[dataKey]}: <span className='weight500'>${payload[0].value}</span></p>
         </div>
       );
     }
@@ -42,22 +43,34 @@ import styles from './graph.module.scss'
   };
   
 
-export default function Graph({ asset, data}: { data:PriceData, asset: string }) {
+export default function Graph({}: { data:PriceData, asset: string }) {
     // const data = [
     //     {
     //       totalValue: 200,
     //       currentValue: 300
     //     },
     //   ];
+
+    const totalInvested = useSelector((state: RootState) => state.calculator.totalInvestedSoFar)
+    const currentPortfolioValue = useSelector((state: RootState) => state.calculator.currentPortfolioValue)
+
+    function getData() {
+      return [
+        {
+          totalInvested,
+          currentPortfolioValue
+        }
+      ]
+    }
   
-      return (<ResponsiveContainer width="95%" height={300}><BarChart data={data} barCategoryGap="10%">
+      return (<ResponsiveContainer width="95%" height={300}><BarChart data={getData()} barCategoryGap="10%">
       
       <XAxis hide={true}/>
       <YAxis />
         <Tooltip cursor={false} shared={false} content={<CustomTooltip />} offset={20}/>
       <Legend wrapperStyle={{ position: 'relative' }} />
-        <Bar dataKey="totalValue" name="Total Invested Amount" fill="var(--success)" />
-        <Bar dataKey="currentValue" name="Current Portfolio Value" fill="var(--danger)" />
+        <Bar dataKey="totalInvested" name="Total Invested Amount" fill="var(--alt-6)" />
+        <Bar dataKey="currentPortfolioValue" name="Current Portfolio Value" fill="var(--alt-7)" />
       </BarChart></ResponsiveContainer>
       );
 }
