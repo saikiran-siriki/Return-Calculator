@@ -58,7 +58,6 @@ export default function Asset({ allCoins, data, pnl }: { allCoins: AllCoins, dat
   let { asset } = router.query;
   asset = asset || allCoins[0].id
 
-console.log(allCoins, asset)
 
   return ( <div className="asset_layout">
       {data.length > 0 && (

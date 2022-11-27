@@ -22,6 +22,8 @@ const DarkTheme = () => {
             --inverted-1: #ffffff;
             --inverted-2: #f9f5fa
             --inverted-3: #eaeaf5;
+            --success: #4AA96C;
+            --danger: #F55C47;
         }
         `}
       </style>
@@ -51,6 +53,8 @@ const DarkTheme = () => {
             --inverted-1: #120b1f;
             --inverted-2: #160f2e;
             --inverted-3: #2c1952;
+            --success: #36AE7C;
+            --danger: #EB5353
         }
         `}
       </style>

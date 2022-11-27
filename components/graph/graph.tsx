@@ -1,10 +1,6 @@
-import {useRouter} from 'next/router'
-import Highcharts from 'highcharts'
-import HighchartsExporting from 'highcharts/modules/exporting'
-import HighchartsReact from 'highcharts-react-official'
-
-import {isValidQuery} from '../../utils/helpers'
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, TooltipProps } from 'recharts';
 import { PriceData } from '../../interfaces/assets'
+import styles from './graph.module.scss'
 
 
 
@@ -25,70 +21,43 @@ import { PriceData } from '../../interfaces/assets'
   // };
   
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
   
 
-export default function Graph({data, asset}: { data:PriceData, asset: string }) {
-  if (typeof Highcharts === 'object') {
-    HighchartsExporting(Highcharts)
-  }
-  const router = useRouter();
-  let options = {}
-     options = {
-        chart: {
-            zoomType: 'x',
-            backgroundColor: 'var(--primary-1)'
-        },
-        title: {
-            text: ``
-        },
-        xAxis: {
-            type: 'datetime'
-        },
-        yAxis: {
-            title: {
-                text: 'Exchange rate'
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            area: {
-                fillColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                      [0, "var(--primary-1)"],
-                      [1, "var(--primary-1)"]
-                  ]
-                },
-                marker: {
-                    radius: 2
-                },
-                lineWidth: 1,
-                states: {
-                    hover: {
-                        lineWidth: 1
-                    }
-                },
-                threshold: null
-            }
-        },
-    
-        series: [{
-            type: 'area',
-            name: `${(asset as string).charAt(0).toUpperCase()+asset?.slice(1)} to USD`,
-            data
-        }]
+  const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>): JSX.Element => {
+    if (active && payload && payload.length>0) {
+      console.log(payload)
+      const toolTipDisplayMap: { [key: string]: string } = {
+        currentValue: 'Current Portfolio Value',
+        totalValue: 'Total Invested Amount'
+      }
+      const dataKey = payload[0].dataKey as string
+      return (
+        <div className={styles.custom_tooltip}>
+          <p className="desc">{toolTipDisplayMap[dataKey]}</p>
+        </div>
+      );
+    }
+    return <></>
+  };
   
-}
-    return <HighchartsReact
-    highcharts={Highcharts}
-    options={options}
-    allowChartUpdate = { true } immutable = { false }
-  />;
+
+export default function Graph({ asset, data}: { data:PriceData, asset: string }) {
+    // const data = [
+    //     {
+    //       totalValue: 200,
+    //       currentValue: 300
+    //     },
+    //   ];
+  
+      return (<ResponsiveContainer width="95%" height={300}><BarChart data={data} barCategoryGap="10%">
+      
+      <XAxis hide={true}/>
+      <YAxis />
+        <Tooltip cursor={false} shared={false} content={<CustomTooltip />} offset={20}/>
+      <Legend wrapperStyle={{ position: 'relative' }} />
+        <Bar dataKey="totalValue" name="Total Invested Amount" fill="var(--success)" />
+        <Bar dataKey="currentValue" name="Current Portfolio Value" fill="var(--danger)" />
+      </BarChart></ResponsiveContainer>
+      );
 }
