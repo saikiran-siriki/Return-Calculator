@@ -19,9 +19,13 @@ const DarkTheme = () => {
             --alt-3: #f5802c;
             --alt-4: #dda83b;
             --alt-5: #fad76c;
+            --alt-6: #AAC4FF;
+            --alt-7: #BA94D1;
             --inverted-1: #ffffff;
             --inverted-2: #f9f5fa
             --inverted-3: #eaeaf5;
+            --success: #4AA96C;
+            --danger: #F55C47;
         }
         `}
       </style>
@@ -48,9 +52,13 @@ const DarkTheme = () => {
             --alt-3: #fcef87;
             --alt-4: #fef8af;
             --alt-5: #fffad3;
+            --alt-6: #51557E;
+            --alt-7: #816797;
             --inverted-1: #120b1f;
             --inverted-2: #160f2e;
             --inverted-3: #2c1952;
+            --success: #36AE7C;
+            --danger: #EB5353
         }
         `}
       </style>
